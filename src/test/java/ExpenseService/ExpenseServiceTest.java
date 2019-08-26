@@ -4,6 +4,8 @@ import ExpenseService.Exception.UnexpectedProjectTypeException;
 import ExpenseService.Expense.ExpenseType;
 import ExpenseService.Project.Project;
 import ExpenseService.Project.ProjectType;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,22 +15,38 @@ class ExpenseServiceTest {
     @Test
     void should_return_internal_expense_type_if_project_is_internal() throws UnexpectedProjectTypeException {
         // given
+    	ProjectType projectType = ProjectType.INTERNAL;
+    	Project project = new Project(projectType,"");
+    	ExpenseService expenseService = new ExpenseService();
         // when
+    	ExpenseType numeType = expenseService.getExpenseCodeByProjectTypeAndName(project);
         // then
+    	Assertions.assertEquals(ExpenseType.INTERNAL_PROJECT_EXPENSE,numeType);
     }
 
     @Test
     void should_return_expense_type_A_if_project_is_external_and_name_is_project_A() throws UnexpectedProjectTypeException {
         // given
+    	ProjectType projectType = ProjectType.EXTERNAL;
+    	Project project = new Project(projectType,"Project A");
+    	ExpenseService expenseService = new ExpenseService();
         // when
+    	ExpenseType numeType = expenseService.getExpenseCodeByProjectTypeAndName(project);
+    	//ExpenseType numeType = expenseService.getExpenseCodeByProjectTypeAndName(project);
         // then
+    	Assertions.assertEquals(ExpenseType.EXPENSE_TYPE_A,numeType);
     }
 
     @Test
     void should_return_expense_type_B_if_project_is_external_and_name_is_project_B() throws UnexpectedProjectTypeException {
         // given
+    	ProjectType projectType = ProjectType.EXTERNAL;
+    	Project project = new Project(projectType,"Project B");
+    	ExpenseService expenseService = new ExpenseService();
         // when
+    	ExpenseType numeType = expenseService.getExpenseCodeByProjectTypeAndName(project);
         // then
+    	Assertions.assertEquals(ExpenseType.EXPENSE_TYPE_B,numeType);
     }
 
     @Test
